@@ -4,15 +4,15 @@ var mysql = require('mysql');
 var uniqid = require('@mdenic/uniqid');
 
 var table = "seedSales";
-//sales: id, firstName, email, belongsTo, influencerURL, createdOn, isPaid
+//sales: id, firstName, email, belongsTo, influencerID, createdOn, isPaid
 let tableTypes = {
-	firstName : "string",
-	lastName : "string", 
+	firstName : "string", 
 	email : "string",
-	status : "string",
-	services : "string",
-	website : "string",
-	usp : "string"
+	belongsTo : "string",
+	influencerID : "string",
+	createdOn : "string",
+	isPaid : "bool",
+	id : "string"
 	};
 let tableFields = Object.keys(tableTypes);
 let fallback = "/";
@@ -78,34 +78,6 @@ else
 	}
 }
 
-const weekAgo = Date.now() - (2000 * 60 * 60 * 24 * 7);
-
-//read the pending applications and this weeks sales from database
-module.exports.read = async function (req, res) {
-let applications = await sql("SELECT * FROM seedApplications WHERE status = 'pending';");	
-let sales = await sql("SELECT * FROM seedSales WHERE createdOn > " + weekAgo + ";");
-res.render('adminDashboard', {"applications" : applications, "sales" : sales});
-
-};
-
-//details about a single item
-module.exports.detail = function (req, res) {
-if (req.query.hasOwnProperty("id") && req.query.id.length >= 1)
-	{
-	let id = connection.escape(req.query.id);
-	connection.query("SELECT * FROM " + table + " WHERE id=" + id + ";", (error, results, fields) => {
-		if (error) throw error;
-		if (results.length > 0)
-			{
-			res.render('details', results[0]);
-			}
-		else
-			{
-			res.redirect("/");	
-			}
-		});
-	}
-};
 
 //check inputs
 function checkInputs(typesObject, input)
@@ -161,28 +133,30 @@ return result;
 
 //insert into database
 module.exports.create = function(req, res) {
-
-//add in startedOn and fullfilled
-req.body.startedOn = Date.now();
-req.body.id = uniqid();
-req.body.authorName = req.session.user.businessName;
-req.body.fullfilled = false;
-let inputs = checkInputs(tableTypes, req.body);
-if (inputs.hasErrors)
+if (req.params.hasOwnProperty("campaignTitle") && req.params.hasOwnProperty("influencerID") && req.params.campaignTitle != "" && req.params.influencerID != "")
 	{
-	console.log('inputs have errors: ' + inputs.errors);
-	req.flash('errorMessage', 'an error occured');
-	res.redirect("/dashboard");	
-	}
-else
-	{
-	let success = "/dashboard";
-	connection.query("INSERT INTO " + table + " (" + inputs.inputKeys.toString(", ") + ") VALUES (" + inputs.inputValues.toString(", ") + ");", (error, results, fields) => {	
-	if (error) throw error;
-	console.log('request submitted successfully');
-	req.flash('successMessage','request created successfully');
-	res.redirect(success);
-	});	
+	//add in id, belongsTo, influencerID, createdOn, isPaid
+	req.body.id = uniqid();
+	req.body.belongsTo = req.params.campaignTitle;
+	req.body.influencerID = req.params.influencerID;
+	req.body.createdOn = Date.toDateString();
+	req.body.isPaid = false;
+	let inputs = checkInputs(tableTypes, req.body);
+	if (inputs.hasErrors)
+		{
+		console.log('inputs have errors: ' + inputs.errors);
+		res.redirect("/campaign/" + req.params.campaignTitle);	
+		}
+	else
+		{
+		let success = "/dashboard";
+		connection.query("INSERT INTO " + table + " (" + inputs.inputKeys.toString(", ") + ") VALUES (" + inputs.inputValues.toString(", ") + ");", (error, results, fields) => {	
+		if (error) throw error;
+		console.log('request submitted successfully');
+		req.flash('successMessage','request created successfully');
+		res.redirect(success);
+		});	
+		}
 	}
 };
 
