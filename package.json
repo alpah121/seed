@@ -1,0 +1,34 @@
+{
+  "name": "mini",
+  "version": "0.0.1",
+  "description": "a site for mini courses",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "miniCourse"
+  },
+  "keywords": [
+    "miniCourse",
+    "course"
+  ],
+  "author": "jacob",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@mdenic/uniqid": "^1.0.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.17.0",
+    "express-validator": "^6.4.0",
+    "morgan": "^1.9.1",
+    "mysql": "^2.18.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  }
+}

@@ -1,0 +1,31 @@
+<h1>{{title}} - Category: {{need}}</h1>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newMessage">Send Message</button><br/>
+Due Date: {{finishBy}}<br/>
+<p>{{description}}</p>
+
+<div class="modal fade" id="newMessage" tabindex="-1" role="dialog" aria-labelledby="messageLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="messageLabel">Send A Message</h5>
+			</div>
+			<div class="modal-body">
+				<form id="messageForm" action="/message/new" method="post">
+					<label for="to">Enter the name of the recipient</label>
+					<input type="text" class="form-control" id="to" name="toUser" value="{{authorName}}"/>
+			
+					<label for="title">Enter the Title</label>
+					<input type="text" class="form-control" id="title" name="title"/>
+			
+					<label for="body">Enter your message</label>
+					<input type="text" class="form-control" id="body" name="body"/>
+			
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" onclick="document.getElementById('messageForm').submit();">Send Message</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/public/js/details.js"></script>

@@ -1,0 +1,87 @@
+<div class="container">
+	<div class="row">
+		<h1>Course Editor</h1>
+	</div>
+	<div class="row" style="color: green">
+		{{successMessage}}
+	</div>
+	<div class="row" style="color: red">
+		{{errorMessage}}
+	</div>
+	<div class="panel-default">
+		<div class="panel-heading">Update Requests</div>
+		<div class="panel-body">
+	{{#each courses}}
+	<div class="row">
+	
+	<h2>{{title}} - <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#course{{id}}" aria-expanded="false" aria-controls="course{{id}}">Edit Current Requests</button></h2>
+		<div class="collapse" id="course{{id}}" >
+			<div class="card card-body">
+				<form action="/request/update" method="post">
+					
+					<button type="button" onclick="deleteRequest({{id}}" class="btn btn-success">Delete This Request</button>
+					
+					<label for="description">Full Description</label>
+					<input type="text" class="form-control" id="description" value="{{description}}" name="description" />
+					
+					<label for="need">Category</label>
+					<select class="form-control" id="need" value="{{need}}" name="need">
+						<option value="website">Website</option>
+						<option value="legal">Legal</option>
+						<option value="marketing">Marketing</option>
+						<option value="logo">Logo</option>
+						<option value="interns">Interns</option>
+						<option value="assistant">Assistant</option>
+						<option value="content">Content</option>
+					</select>
+					
+					<label for="finishBy">When do you need this by?</label>
+					<input type="date" class="form-control" id="finishBy" value="{{finishBy}}" name="finishBy" />
+					
+					<button type="submit" class="btn btn-primary">Create</button>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	{{/each}}
+	</div>
+	</div>
+	<div class="panel-default">
+		<div class="panel-heading">Create A Request</div>
+		<div class="panel-body">
+	<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#createCourse" aria-expanded="true" aria-controls="createCourse">Create New Request</button>
+			<div class="collapse show" id="createCourse"> 
+			<div class="card card-body">
+				<form action="/request/new" method="post">
+
+					<label for="title">Title</label>
+					<input type="text" class="form-control" id="title" name="title" placeholder="Enter something short but sweet..." />
+
+					<label for="description">Full Description</label>
+					<input type="text" class="form-control" id="description" name="description" placeholder="This can be a few paragraphs long" name="description" />
+					
+					<label for="need">Category</label>
+					<select class="form-control" id="need" name="need">
+						<option value="website">Website</option>
+						<option value="legal">Legal</option>
+						<option value="marketing">Marketing</option>
+						<option value="logo">Logo</option>
+						<option value="interns">Interns</option>
+						<option value="assistant">Assistant</option>
+						<option value="content">Content</option>
+					</select>
+					
+					<label for="finishBy">When do you need this by?</label>
+					<input type="date" class="form-control" id="finishBy" name="finishBy" />
+					
+					<button type="submit" class="btn btn-primary">Create</button> 
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+
+<script src="/public/js/dashboard.js"></script>
+

@@ -1,0 +1,24 @@
+<div class="jumbotron">
+	<h1 class="display-4">Requests</h1>
+	<p class="lead">If you find a request of interest. Click on it and you will be redirected to the request details page.</p> 
+</div>
+<div class="row justify-content-center">
+	<div class="col-md-6 text-center">
+		<h2>Note</h2>
+	</div>
+</div>
+<div class="row justify-content-center">
+	<div class="col-md-8 text-center">
+		<p>Please only take further action when you are confident you can complete the task to a satisfactory standard.</p>
+	</div>
+</div>
+<div class="container">
+{{#each requests}}
+	<div class="row">
+		<a href="/request?id={{id}}">
+		<h2>{{title}}</h2>
+		<br/><small>Category: {{need}}</small>
+		</a>
+	</div>
+{{/each}}
+</div>

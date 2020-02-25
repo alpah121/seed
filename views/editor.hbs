@@ -1,0 +1,61 @@
+<div class="container">
+	<div class="row">
+	<h1>Course Editor</h1>
+	</div>
+	{{#each courses}}
+	<div class="row">
+	
+	<h2>{{title}} - <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#course{{id}}" aria-expanded="false" aria-controls="course{{id}}">Edit</button></h2>
+		<div class="collapse" id="course{{id}}" 
+			<div class="card card-body">
+				<form action="/creator/update" method="post">
+
+					<label for="shortDescription">Short Description</label>
+					<input type="text" class="form-control" id="shortDescription" placeholder="{{shortDescription}}" name="shortDescription" />
+					
+					<label for="description">Full Description</label>
+					<input type="text" class="form-control" id="description" placeholder="{{description}}" name="description" />
+					
+					<label for="imageLink">Url of Image</label>
+					<input type="text" class="form-control" id="imageLink" placeholder="{{imageLink}}" name="imageLink" />
+					
+					<label for="video">Enter In A New Video URL</label>
+					<input type="text" class="form-control" id="video" placeholder="http://"/>
+					<button type="button" class="btn btn-info">Add Video Link</button>
+					<input type="hidden" id="videoLinks" name="videoLinks" value="{{videoLinks}}"/>
+					
+					<label for="isLive">Is Public</label>
+					<input type="checkbox" class="form-control" id="isLive" name="isLive" />
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	{{/each}}
+	<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#createCourse" aria-expanded="false" aria-controls="createCourse">Create New Course</button>
+			<div class="collapse" id="course{{id}}" 
+			<div class="card card-body">
+				<form action="/creator/update" method="post">
+
+					<label for="shortDescription">Short Description</label>
+					<input type="text" class="form-control" id="shortDescription" placeholder="Enter A brief description of your course. Fifty words or less." name="shortDescription" />
+					
+					<label for="description">Full Description</label>
+					<input type="text" class="form-control" id="description" placeholder="Enter a full description of your course. More than fifty words." name="description" />
+					
+					<label for="imageLink">Url of Image</label>
+					<input type="text" class="form-control" id="imageLink" placeholder="http://" name="imageLink" />
+					
+					<label for="video">Enter In A New Video URL</label>
+					<input type="text" class="form-control" id="video" placeholder="http://"/>
+					<button type="button" class="btn btn-info">Add Video Link</button>
+					<input type="hidden" id="videoLinks" name="videoLinks"/>
+					
+					<label for="isLive">Is Public</label>
+					<input type="checkbox" class="form-control" id="isLive" name="isLive" />
+					
+				</form>
+			</div>
+		</div>
+
+</div>

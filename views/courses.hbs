@@ -1,0 +1,11 @@
+<h1>Courses</h1>
+<div class="container">
+	{{#each courses}}
+	<div class="row">
+	<img src="{{imageLink}}"/>
+	<h2>{{title}} - {{average}}/5 stars({{totalRatings}})</h2>
+	<p>{{shortDescription}}</p>
+	
+	</div>
+	{{/each}}
+</div>

@@ -1,0 +1,55 @@
+<html>
+</head>
+<title>Sidebar Component</title>
+<link href="/public/css/bootstrap.css" rel="stylesheet">
+<style>
+    .wrapper {
+	display: flex;
+	width: 100%;
+	align-items: stretch;	
+	}
+	
+	#sidebar {
+	min-width: 250px;
+	max-width; 250px;	
+	min-height: 100vh;
+	}
+	
+	#sidebar.active {
+	margin-left: -250px;	
+	}
+	
+	
+</style>
+</head>
+<body>
+<div class="wrapper">
+	<nav id="sidebar">
+		<div class="sidebar-header">
+		<h3>Components</h3>
+		</div>
+		
+	</nav>
+</div>
+<div class="container-fluid">
+	<a id="toggle" onclick="toggleSidebar()">
+		<button class="btn btn-info">
+		<i class="fas fa-align-left"></i>
+	<span>Toggle Sidebar</span>
+		</button>
+	</a>
+
+</div>
+<script src="/public/js/bootstrap.js"></script>
+<script src="/public/js/jquery.js"></script>
+      <script>window.jQuery || document.write('<script src="/public/js/jquery2.js"><\/script>')</script>
+<script>
+function toggleSidebar()
+{
+sidebar.classList.toggle('active');
+console.log("sidebar toggled");
+}
+
+</script>
+</body>
+</html>

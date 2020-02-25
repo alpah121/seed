@@ -1,0 +1,123 @@
+<html>
+<head>
+<title>{{title}}</title>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Product example · Bootstrap</title>
+
+   
+    <!-- Bootstrap core CSS -->
+<link href="/public/css/bootstrap.css" rel="stylesheet">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="/public/css/product.css" rel="stylesheet">
+    <style>
+    .wrapper {
+	display: flex;
+	width: 100%;
+	align-items: stretch;	
+	}
+	
+	#sidebar {
+	min-width: 250px;
+	max-width; 250px;	
+	min-height: 100vh;
+	}
+	
+	#sidebar.active {
+	margin-left: -250px;	
+	}
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="loggedInUser">
+	<div class="collapse navbar-collapse" id="navbar">
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link" href="/requests">requests</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/messages">messages</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/dashboard">dashboard</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="loggedOutUser">
+	<div class="collapse navbar-collapse" id="navbar">
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link" href="/login">login</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/signUp">Sign Up</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/">home</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+{{{body}}}
+
+<div class="wrapper">
+	
+
+</div>
+<script src="/public/js/jquery.js"></script>
+<script src="/public/js/bootstrap.js"></script>
+<script>
+var loggedIn = document.getElementById("loggedInUser");
+var loggedOut = document.getElementById("loggedOutUser");
+
+function hideNavbar(data)
+{
+if (data.loggedIn == true)
+	{
+	loggedOut.style.display = "none";	
+	}
+else
+	{
+	loggedIn.style.display = "none";	
+	}	
+}
+
+//show correct navbar
+var ajax = new XMLHttpRequest;
+ajax.onreadystatechange = function() {
+	if (this.readyState == 4 && this.status == 200)
+		{
+		hideNavbar(JSON.parse(ajax.responseText));	
+		}
+	} 
+ajax.open("GET", "/api/login", true);	
+ajax.send();	
+</script>
+      <script>window.jQuery || document.write('<script src="/public/js/jquery2.js"><\/script>')</script>
+</body>
+</html>
